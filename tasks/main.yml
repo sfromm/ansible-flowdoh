@@ -1,6 +1,6 @@
 ---
 - name: check for flowdoh archive
-  stat: path={{ flowdoh_src_dir }}/{{ flowdoh_version }}.tar.gz
+  stat: path={{ flowdoh_src_dir }}/{{ flowdoh_version }}
   register: flowdoh_archive_stat
 
 - name: get flowdoh archive
@@ -15,6 +15,7 @@
       tar xzf {{ flowdoh_version }}
 
 - name: install flowdoh backend
+  when: flowdoh_get_url.changed
   command: >-
       chdir={{ flowdoh_src_dir }}/flowdoh
       install -o {{ nfsen_user }} -g {{ nfsen_group }} -m 0644
@@ -29,11 +30,13 @@
       mode=0775
 
 - name: install flowdoh frontend
+  when: flowdoh_get_url.changed
   command: >-
       chdir={{ flowdoh_src_dir }}/flowdoh
       rsync -a frontend/ {{ nfsen_frontend_plugindir }}
 
 - name: make sure frontend files are not world-writable
+  when: flowdoh_get_url.changed
   command: >
       find {{ nfsen_frontend_plugindir }} -type {{ item.type }} -exec chmod {{ item.chmod }} {} \;
   with_items:
