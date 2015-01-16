@@ -22,12 +22,12 @@ This role uses the following variables from the sfromm.nfsen role:
 * **nfsen_frontend_plugindir**: The path where nfsen frontend plugins
   are installed.
 
-The variables specific to the /flowdoh/ role are the following:
+The variables specific to the *flowdoh* role are the following:
 
-- **flowdoh_url**: URL to where flowdoh may be downloaded from.
+- **flowdoh_url**: URL to where *flowdoh* may be downloaded from.
 - **flowdoh_version**: The name of the downloaded file.  For example,
   this may be /FlowDoh_1.0.2.tar.gz/.
-- **flowdoh_src_dir**: The path to where /flowdoh/ source will be
+- **flowdoh_src_dir**: The path to where *flowdoh* source will be
   downloaded to.
 - **flowdoh_num_toptalkers**: The number of top talkers to look for.
 - **flowdoh_num_flows_listed**: Number of flows to list in frontend.
