@@ -10,7 +10,7 @@
 
 - name: extract flowdoh archive
   command: >-
-      chdir={{ flowdowh_src_dir }}
+      chdir={{ flowdoh_src_dir }}
       creates={{ flowdoh_src_dir }}/flowdoh
       tar xzf {{ flowdoh_version }}.tar.gz
 
