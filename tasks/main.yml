@@ -35,7 +35,7 @@
 
 - name: make sure frontend files are not world-writable
   command: >
-      find {{ nfsen_frontend_plugindir }} -type {{ item.type }} chmod {{ item.chmod }} {} \;
+      find {{ nfsen_frontend_plugindir }} -type {{ item.type }} -exec chmod {{ item.chmod }} {} \;
   with_items:
       - { type: d, chmod: go-w  }
       - { type: f, chmod: go-wx }
