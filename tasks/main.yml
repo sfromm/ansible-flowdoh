@@ -46,7 +46,7 @@
 - name: template flowdoh.conf
   template: >
       src=flowdoh.conf.j2
-      dest={{ nfsen_backend_plugin_dir }}/flowdoh
+      dest={{ nfsen_backend_plugindir }}/flowdoh
       owner=root
       group=root
       mode=0644
