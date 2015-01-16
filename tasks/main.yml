@@ -21,14 +21,6 @@
       install -o {{ nfsen_user }} -g {{ nfsen_group }} -m 0644
       backend/flowdoh.pm {{ nfsen_backend_plugindir }}
 
-- name: create alerts path
-  file: >
-      path={{ nfsen_backend_plugindir }}/flowdoh/alerts
-      state=directory
-      owner={{ nfsen_user }}
-      group={{ nfsen_group }}
-      mode=0775
-
 - name: install flowdoh frontend
   when: flowdoh_get_url.changed
   command: >-
@@ -43,10 +35,18 @@
       - { type: d, chmod: go-w  }
       - { type: f, chmod: go-wx }
 
+- name: create alerts path
+  file: >
+      path={{ nfsen_backend_plugindir }}/flowdoh/alerts
+      state=directory
+      owner={{ nfsen_user }}
+      group={{ nfsen_group }}
+      mode=0775
+
 - name: template flowdoh.conf
   template: >
       src=flowdoh.conf.j2
-      dest={{ nfsen_backend_plugindir }}/flowdoh
+      dest={{ nfsen_backend_plugindir }}/flowdoh/flowdoh.conf
       owner=root
       group=root
       mode=0644
