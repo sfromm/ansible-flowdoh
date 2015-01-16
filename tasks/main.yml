@@ -23,6 +23,7 @@
 - name: create alerts path
   file: >
       path={{ nfsen_backend_plugindir }}/flowdoh/alerts
+      state=directory
       owner={{ nfsen_user }}
       group={{ nfsen_group }}
       mode=0775
