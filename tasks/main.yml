@@ -12,7 +12,7 @@
   command: >-
       chdir={{ flowdoh_src_dir }}
       creates={{ flowdoh_src_dir }}/flowdoh
-      tar xzf {{ flowdoh_version }}.tar.gz
+      tar xzf {{ flowdoh_version }}
 
 - name: install flowdoh backend
   command: >-
