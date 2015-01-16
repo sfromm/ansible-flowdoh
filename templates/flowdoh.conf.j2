@@ -1,0 +1,75 @@
+# {{ ansible_managed }}
+# FlowDoh configuration file
+#
+# Changes to this file will not be applied until you reload NfSen
+
+
+
+# Number of results to display in the Top Talkers tab.
+num_toptalkers={{ flowdoh_num_toptalkers }}
+
+# Order (separated by ',') in which to display the bytes, packets, or flows.
+display_order = {{ flowdoh_display_order }}
+
+# Number of flows to display when viewing an IP's flows.
+num_flows_listed={{ flowdoh_num_flows_listed }}
+
+
+
+# Trigger an alert when a user goes above these percentages, enter 0 to disable:
+alert_bytes_percent={{ flowdoh_alert_bytes_percent }}
+alert_packets_percent={{ flowdoh_alert_packets_percent }}
+alert_flows_percent={{ flowdoh_alert_flows_percent }}
+
+# Enable email alerts (SMTP_SERVER and MAIL_FROM must be configured in nfsen.conf)
+use_email_alerts={{ flowdoh_email_alerts }}
+
+# Email Settings. You can include multiple email addresses by separating them with a comma.
+email_address_to={{ flowdowh_email_address }}
+email_subject={{ flowdown_email_subject }}
+
+
+
+# Define colors for ease of use in the color tables below
+# Format: name=HTML_color
+defined_colors {
+        green=00FF00
+        yellow=FFFF00
+        orange=FFBB00
+        red=FF0000
+}
+
+# Colors for bytes, packets, and flows based on percentages.
+# Valid Formats:        percentage=defined_color
+#                                       percentage=HTML_color
+bytes_colors {
+        0=green
+        10=yellow
+        20=orange
+        30=red
+}
+
+packets_colors {
+        0=green
+        10=yellow
+        20=orange
+        30=red
+}
+
+flows_colors {
+        0=green
+        10=yellow
+        20=orange
+        30=red
+}
+
+## Rainbow example!
+#flows_colors {
+#       0=8F00FF
+#       1.5=4B0082
+#       2=0000FF
+#       3=green
+#       5=yellow
+#       10=FF7F00
+#       18=red
+#}

@@ -1,0 +1,13 @@
+---
+flowdoh_version: FlowDoh_1.0.2.tar.gz
+flowdoh_url: http://downloads.sourceforge.net/project/flowdoh/{{ flowdoh_version }}
+flowdoh_src_dir: /usr/local/src
+flowdoh_num_toptalkers: 10
+flowdoh_display_order: bytes,packets,flows
+flowdoh_num_flows_listed: 100
+flowdoh_email_address: root@localhost
+flowdoh_email_subject: FlowDoh alert
+flowdoh_email_alerts: no
+flowdoh_alert_bytes_percent: 50
+flowdoh_alert_packets_percent: 50
+flowdoh_alert_flows_percent: 40

@@ -1,0 +1,48 @@
+---
+- name: check for flowdoh archive
+  stat: path={{ flowdoh_src_dir }}/{{ flowdoh_version }}.tar.gz
+  register: flowdoh_archive_stat
+
+- name: get flowdoh archive
+  when: not flowdoh_archive_stat.stat.exists
+  get_url: url={{ flowdoh_url }} dest={{ flowdoh_src_dir }}
+  register: flowdoh_get_url
+
+- name: extract flowdoh archive
+  command: >-
+      chdir={{ flowdowh_src_dir }}
+      creates={{ flowdoh_src_dir }}/flowdoh
+      tar xzf {{ flowdoh_version }}.tar.gz
+
+- name: install flowdoh backend
+  command: >-
+      chdir={{ flowdoh_src_dir }}/flowdoh
+      install -o {{ nfsen_user }} -g {{ nfsen_group }} -m 0644
+      backend/flowdoh.pm {{ nfsen_backend_plugindir }}
+
+- name: create alerts path
+  file: >
+      path={{ nfsen_backend_plugindir }}/flowdoh/alerts
+      owner={{ nfsen_user }}
+      group={{ nfsen_group }}
+      mode=0775
+
+- name: install flowdoh frontend
+  command: >-
+      chdir={{ flowdoh_src_dir }}/flowdoh
+      rsync -a frontend/ {{ nfsen_frontend_plugindir }}
+
+- name: make sure frontend files are not world-writable
+  command: >
+      find {{ nfsen_frontend_plugindir }} -type {{ item.type }} chmod {{ item.chmod }} {} \;
+  with_items:
+      - { type: d, chmod: go-w  }
+      - { type: f, chmod: go-wx }
+
+- name: template flowdoh.conf
+  template: >
+      src=flowdoh.conf.j2
+      dest={{ nfsen_backend_plugin_dir }}/flowdoh
+      owner=root
+      group=root
+      mode=0644
