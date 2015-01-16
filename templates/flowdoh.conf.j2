@@ -22,7 +22,11 @@ alert_packets_percent={{ flowdoh_alert_packets_percent }}
 alert_flows_percent={{ flowdoh_alert_flows_percent }}
 
 # Enable email alerts (SMTP_SERVER and MAIL_FROM must be configured in nfsen.conf)
-use_email_alerts={{ flowdoh_email_alerts }}
+{% if flowdoh_email_alerts %}
+use_email_alerts=true
+{% else %}
+use_email_alerts=false
+{% endif %}
 
 # Email Settings. You can include multiple email addresses by separating them with a comma.
 email_address_to={{ flowdoh_email_address }}
